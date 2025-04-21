@@ -10,6 +10,7 @@ interface BlogPostPageProps {
     params: {
         slug: string;
     };
+    searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
@@ -29,6 +30,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             description: post.description,
             type: 'article',
             publishedTime: post.date,
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/blog/${post.slug}`,
+            images: [
+                {
+                    url: post.image,
+                    width: 1200,
+                    height: 630,
+                },
+            ],
             authors: [post.author],
         },
         twitter: {
