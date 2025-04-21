@@ -89,7 +89,7 @@ export default async function BlogPost({
                 <header className="mb-4">
                     <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
                     <div className="text-gray-600 dark:text-gray-400">
-                        {new Date(post.date).toLocaleDateString()} • {post.author}
+                        {new Date(post.date).toLocaleDateString()} • <span className="capitalize">{post.author}</span>
                     </div>
                 </header>
                 <MarkdownContent content={post.content} />

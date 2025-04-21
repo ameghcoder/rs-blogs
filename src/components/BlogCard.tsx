@@ -26,7 +26,7 @@ const BlogCard = ({ post }: { post: Post }) => {
                 <div className="p-5 flex flex-col justify-between h-full">
                     <div>
                         <div className="mb-2 text-xs">
-                            {new Date(post.date).toLocaleDateString()} • {post.author}
+                            {new Date(post.date).toLocaleDateString()} • <span className="capitalize">{post.author}</span>
                         </div>
                         <a href="#">
                             <h2 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">{post.title}</h2>
