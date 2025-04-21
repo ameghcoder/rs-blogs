@@ -6,13 +6,16 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import Image from 'next/image';
 
+// Define the Props type for the page component
 type Props = {
     params: { slug: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const post = await getPostBySlug(params.slug);
+    // Await params before using
+    const resolvedParams = await Promise.resolve(params);
+    const post = await getPostBySlug(resolvedParams.slug);
 
     if (!post) {
         return {
@@ -53,11 +56,14 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function BlogPost({ params }: Props) {
-    const post = await getPostBySlug(params.slug);
-
-    console.log("params:", params);
-    console.log("typeof params.slug:", typeof params.slug);
+export default async function BlogPost({
+    params,
+}: {
+    params: { slug: string }
+}) {
+    // Await params before using
+    const resolvedParams = await Promise.resolve(params);
+    const post = await getPostBySlug(resolvedParams.slug);
 
     if (!post) {
         notFound();
