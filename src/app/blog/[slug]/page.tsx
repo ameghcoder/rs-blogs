@@ -6,15 +6,14 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import Image from 'next/image';
 
-interface BlogPostPageProps {
-    params: {
-        slug: string;
-    };
-    searchParams?: { [key: string]: string | string[] | undefined };
+type Props = {
+    params: Promise<{ slug: string }> | { slug: string }
+    searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-    const post = await getPostBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const resolvedParams = await params;
+    const post = await getPostBySlug(resolvedParams.slug);
 
     if (!post) {
         return {
@@ -55,8 +54,9 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function BlogPost({ params }: BlogPostPageProps) {
-    const post = await getPostBySlug(params.slug);
+export default async function BlogPost({ params }: Props) {
+    const resolvedParams = await params;
+    const post = await getPostBySlug(resolvedParams.slug);
 
     if (!post) {
         notFound();
