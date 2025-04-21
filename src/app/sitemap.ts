@@ -1,8 +1,8 @@
 import { getAllPosts } from "@/lib/blog";
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getAllPosts();
   const baseUrl = "https://myblog.com"; // Replace with your actual domain
 
   // Create sitemap entries for static pages
