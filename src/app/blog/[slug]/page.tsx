@@ -7,13 +7,12 @@ import JsonLd from '@/components/JsonLd';
 import Image from 'next/image';
 
 type Props = {
-    params: Promise<{ slug: string }> | { slug: string }
+    params: { slug: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const resolvedParams = await params;
-    const post = await getPostBySlug(resolvedParams.slug);
+    const post = await getPostBySlug(params.slug);
 
     if (!post) {
         return {
@@ -55,8 +54,10 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPost({ params }: Props) {
-    const resolvedParams = await params;
-    const post = await getPostBySlug(resolvedParams.slug);
+    const post = await getPostBySlug(params.slug);
+
+    console.log("params:", params);
+    console.log("typeof params.slug:", typeof params.slug);
 
     if (!post) {
         notFound();

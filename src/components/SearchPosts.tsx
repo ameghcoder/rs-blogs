@@ -19,13 +19,13 @@ export default function SearchPosts({ posts }: SearchPostsProps) {
 
         console.log(searchTerm);
 
-        const searchTermLower = searchTerm;
+        const searchTermLower = searchTerm.toLowerCase();
         const filtered = posts.filter(
             (post) =>
-                (post.title.toLowerCase()).includes(searchTermLower) ||
-                (post.description.toLowerCase()).includes(searchTermLower) ||
-                (post.author.toLowerCase()).includes(searchTermLower) ||
-                (post.content.toLowerCase()).includes(searchTermLower)
+                (post.title?.toLowerCase() || '').includes(searchTermLower) ||
+                (post.description?.toLowerCase() || '').includes(searchTermLower) ||
+                (post.author?.toLowerCase() || '').includes(searchTermLower) ||
+                (post.content?.toLowerCase() || '').includes(searchTermLower)
         );
         setFilteredPosts(filtered);
     }, [searchTerm, posts]);

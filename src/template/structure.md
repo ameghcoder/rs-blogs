@@ -11,4 +11,4 @@ author: "author name"
 
 your markdown content
 
-If you don't know how to write the markdown, then you can use this markdown editor, go to this link write your content and replace here - https://stackedit.io/app#
+If you don't know how to write the markdown, then you can use this markdown editor, go to this link write your content and replace here - https://dillinger.io/
